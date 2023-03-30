@@ -3,46 +3,35 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-{% if user is not null %}
-  <h1>{{ user.firstname }} {{ user.lastname }}</h1>
-  <p>Email: {{ user.email }}</p>
-  <p>Username: {{ user.username }}</p>
-
-  {% if posts is empty %}
-       <a href="{{ path('app_new_post') }}" class="btn btn-primary">Ajouter un post</a>
-
-    {% else %}
- <h2>Posts by {{ user.username }}</h2>
-       
-            <div class="container w-100">
-                <div class="row justify-content-around flex-wrap overflow-auto">
-                  {% for post in posts %}
-                      <h3>{{ post.title }}</h3>
-                          <p>{{ post.content }}</p>
-                          <div class="card-footer text-muted">Publié le {{ post.date|date('d/m/Y') }}
-                          <a href={{ path('app_post', {'id':post.id})}} class="btn btn-primary">Voir plus</a>
-                             <br> <a href="{{ path('app_new_post') }}" class="btn btn-primary">Ajouter un post</a>
-                         <br> <br><a href={{ path('app_delete_post', {'id':post.id})}} class="btn btn-primary">Delete Post</a>
-                          </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-    {% endif %}
-    {% if comments is empty %}
-  <p>Vous n'avez pas de commentaire.</p>
-{% else %}
-  <h2>Comments by {{ user.username }}</h2>
-  {% for post in posts %}
-    <h3>{{ post.title }}</h3>
-    {% for comment in post.comments %}
-      <p>Commentaire : <b>{{ comment.text }}</b></p>
-    {% endfor %}
-  {% endfor %}
-{% endif %}
-
-
-{% else %}
-  <p>Vous devez vous connecter pour accéder à cette page.</p>
-{% endif %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% if user is not null %}
+            <h1 class="my-5 text-center">Informations du profil</h1>
+            <table class="table mt-5">
+                <tbody>
+                    <tr>
+                        <th scope="row">Prénom</th>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nom de famille</th>
+                        <td>{{ user.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Adresse email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nom d'utilisateur</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% else %}
+            <p class="text-center">Vous devez vous connecter pour accéder à cette page.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
