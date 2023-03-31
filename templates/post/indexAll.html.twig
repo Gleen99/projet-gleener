@@ -13,13 +13,14 @@
                 {% for post in posts %}
                     <div class="card text-center w-25 mt-4 p-0">
                         <div class="card-body">
-                            <h5 class="card-title">{{ post.title }}</h5>
+                            <h4 class="card-title">{{ post.title }}</h4>
                             {# réduction de la taille d'affichage #}
-                            <h6 class="card-title muted">{{ post.description|slice(0, 120) ~ (post.description|length > 150 ? '...' : '') }}</h6>
+                            <h7 class="card-title muted">{{ post.description|slice(0, 120) ~ (post.description|length > 150 ? '...' : '') }}</h7>
                             {# <p class="card-text">{{ post.content }}</p> #}
+                            <br>
                             <a href={{ path('app_post', {'id':post.id})}} class="btn btn-primary">Voir contenu</a>
                         </div>
-                        <div class="card-footer text-muted">Publié le {{ post.date|date('d/m/Y') }} par {{ post.creator.username }}</div>
+                        <div class="card-footer text-muted">Publié le {{ post.date|date('d/m/Y') }} par <strong>{{ post.creator.username }}</strong></div>
                     </div>
                 {% endfor %}
 

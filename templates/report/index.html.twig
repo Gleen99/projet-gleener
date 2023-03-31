@@ -1,21 +1,29 @@
-<div class="container w-100">
-    <div class="row justify-content-around">
+{% extends 'base.html.twig' %}
+{% block title %}Signalement{% endblock %}
 
-        <div class="card text-center w-100 mt-4 p-0 mb-4">
-        
-            <div class="card-header">Signaler un commentaire</div>
-            <div class="card-body">
-                <p>Commentaire: <b>{{ comments.text }}</b> crée par{{ comments.creator.username }}</p>
-               
-                {% if user %}
-                    {{ form_start(reportForm, {'action': path('add_report', {'id': comments.id})}) }}
-                    {{ form_widget(reportForm.reason) }}
-                    <button type="submit">Envoyer</button>
-                    {{ form_end(reportForm) }}
-                {% else %}
-                    <h6 class="card-title text-muted">Tu dois être connecté(e) pour ça!</h6>
-                {% endif %}
+{% block body %}
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Signaler un commentaire</div>
+                <div class="card-body">
+                    <p class="card-text">Commentaire : <b>{{ comments.text }}</b><br> Créé par : <strong>{{ comments.creator.username }}</strong></p>
+
+                    {% if user %}
+                        {{ form_start(reportForm, {'action': path('add_report', {'id': comments.id}), 'attr': {'class': 'form-inline'}}) }}
+                        <div class="form-group mr-2">
+                            {{ form_widget(reportForm.reason, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                        {{ form_end(reportForm) }}
+                    {% else %}
+                        <h6 class="card-title text-muted">Tu dois être connecté(e) pour signaler ce commentaire!</h6>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+{% endblock %}
