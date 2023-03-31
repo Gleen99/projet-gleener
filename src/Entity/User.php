@@ -23,10 +23,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $roles = [];
-    const ROLES = array(
-        'Admin' => 'ROLE_ADMIN',
-        'User' => 'ROLE_USER'
-    );
+    // const ROLES = array(
+    //     'Admin' => 'ROLE_ADMIN',
+    //     'User' => 'ROLE_USER'
+    // );
+
+    const ROLE_ADMIN = 'ROLE_ADMIN';
     /**
      * @var string The hashed password
      */
@@ -61,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
         $this->blogs = new ArrayCollection();
         $this->comments = new ArrayCollection();
+
+        // Ajouter le rôle 'ROLE_USER' par défaut
+        $this->roles[] = 'ROLE_USER';
     }
 
     public function getId(): ?int
@@ -97,8 +102,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = '';
+        // Ajouter le rôle 'ROLE_ADMIN' si l'utilisateur l'a
+        if (in_array(self::ROLE_ADMIN, $roles)) {
+            $roles[] = self::ROLE_ADMIN;
+        }
+        // garantir que chaque utilisateur a au moins ROLE_USER
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
 
         return array_unique($roles);
     }
