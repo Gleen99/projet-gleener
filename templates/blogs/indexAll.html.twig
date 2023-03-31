@@ -17,9 +17,21 @@
             <div class="card-body">
                 <h5 class="card-title">{{ blog.title }}</h5>
                 <h6 class="card-title muted">{{ blog.description }}</h6>
+                   {% set count = 0 %}
+                   {# afficher que les 1 premiers lignes #}
                     {% for paragraph in blog.content|split("\n") %}
                         {% if paragraph|trim is not empty %}
-                            <p class="card-text" style="text-align: left; font-size: 1.1rem;">{{ paragraph|trim }}</p>
+                            {% for line in paragraph|trim|split("<br>") %}
+                                {% if count < 1 %}
+                                    <p class="card-text" style="text-align: left; font-size: 1.1rem;">{{ line }}</p>
+                                    {% set count = count + 1 %}
+                                {% else %}
+                                    {% if count == 1 %}
+                                        <p class="card-text" style="text-align: left; font-size: 1.1rem;">{{ line }}...</p>
+                                        {% set count = count + 1 %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
                     {% endfor %}
                 <a href={{ path('app_blog', {'id':blog.id})}} class="btn btn-primary">Voir plus</a>
