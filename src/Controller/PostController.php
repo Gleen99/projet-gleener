@@ -14,6 +14,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 class PostController extends AbstractController
 {
     #[Route('/post/{id}', name: 'app_post')]
@@ -67,38 +69,67 @@ class PostController extends AbstractController
             'id' => $post->getId()
         ]);
     }
-/**Like Posts */
-#[Route("/comment/{id}/like", name:"like_comment")]
-public function likeComment(Comments $comment, EntityManagerInterface $entityManager)
-{
-      //Si pas de likes trouvé, on set à null comme ça le twig gère l'erreur
-      if (!$comment) {
-        $comment= [null];
+
+
+    #[Route("/comment/{id}/like", name:"like_comment")]
+    public function likeComment(Comments $comment, EntityManagerInterface $entityManager, SessionInterface $session)
+    {
+        // Vérifier si l'utilisateur a déjà aimé ou disliké ce commentaire dans cette session
+        $likedComments = $session->get('liked_comments', []);
+        $dislikedComments = $session->get('disliked_comments', []);
+        if (in_array($comment->getId(), $likedComments)) {
+            $this->addFlash('warning', 'Vous avez déjà aimé ce commentaire');
+            return $this->redirectToRoute('app_post', ['id' => $comment->getPost()->getId()]);
+        }
+        if (in_array($comment->getId(), $dislikedComments)) {
+            $comment->setDislikes($comment->getDislikes() - 1);
+            $entityManager->flush();
+            $dislikedComments = array_diff($dislikedComments, [$comment->getId()]);
+            $session->set('disliked_comments', $dislikedComments);
+        }
+    
+        // Ajouter le like et sauvegarder en base de données
+        $comment->setLikes($comment->getLikes() + 1);
+        $entityManager->flush();
+    
+        // Enregistrer l'ID du commentaire dans la session pour indiquer que l'utilisateur l'a aimé
+        $likedComments[] = $comment->getId();
+        $session->set('liked_comments', $likedComments);
+    
+        // Rediriger vers la page du post
+        return $this->redirectToRoute('app_post', ['id' => $comment->getPost()->getId()]);
+    }
+    
+    #[Route("/comment/{id}/dislike", name:"dislike_comment")]
+    public function dislikeComment(Comments $comment, EntityManagerInterface $entityManager, SessionInterface $session)
+    {
+        // Vérifier si l'utilisateur a déjà aimé ou disliké ce commentaire dans cette session
+        $likedComments = $session->get('liked_comments', []);
+        $dislikedComments = $session->get('disliked_comments', []);
+        if (in_array($comment->getId(), $dislikedComments)) {
+            $this->addFlash('warning', 'Vous avez déjà disliké ce commentaire');
+            return $this->redirectToRoute('app_post', ['id' => $comment->getPost()->getId()]);
+        }
+        if (in_array($comment->getId(), $likedComments)) {
+            $comment->setLikes($comment->getLikes() - 1);
+            $entityManager->flush();
+            $likedComments = array_diff($likedComments, [$comment->getId()]);
+            $session->set('liked_comments', $likedComments);
+        }
+    
+        // Ajouter le dislike et sauvegarder en base de données
+        $comment->setDislikes($comment->getDislikes() + 1);
+        $entityManager->flush();
+    
+        // Enregistrer l'ID du commentaire dans la session pour indiquer que l'utilisateur l'a disliké
+        $dislikedComments[] = $comment->getId();
+        $session->set('disliked_comments', $dislikedComments);
+    
+        // Rediriger vers la page du post
+        return $this->redirectToRoute('app_post', ['id' => $comment->getPost()->getId()]);
     }
 
-    $comment->setLikes($comment->getLikes() + 1);
-    $entityManager->flush();
 
-    return $this->redirectToRoute('app_post', [
-        'id' => $comment->getPost()->getId()
-    ]);}
-/**Dislike Posts */
-#[Route("/comment/{id}/dislike", name:"dislike_comment")]
-public function dislikeComment(Comments $comment, EntityManagerInterface $entityManager)
-{
-          //Si pas de likes trouvé, on set à null comme ça le twig gère l'erreur
-
-    if (!$comment) {
-        $comments = [null];
-    }
-
-    $comment->setDislikes($comment->getDislikes() + 1);
-    $entityManager->flush();
-
-    return $this->redirectToRoute('app_post', [
-        'id' => $comment->getPost()->getId()
-    ]);
-}
 /**Create Posts */
 
 #[Route('/new/post', name: 'app_new_post')]
