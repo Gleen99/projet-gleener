@@ -15,8 +15,9 @@
         {% for blog in blogs %}
         <div class="card text-center w-100 mt-4 p-0">
             <div class="card-body">
-                <h5 class="card-title">{{ blog.title }}</h5>
-                <h6 class="card-title muted">{{ blog.description }}</h6>
+                <h4 class="card-title">{{ blog.title }}</h4>
+                <h6 class="card-title muted" style="text-align: left;" >Description : {{ blog.description }}</h6>
+                <br>
                    {% set count = 0 %}
                    {# afficher que les 1 premiers lignes #}
                     {% for paragraph in blog.content|split("\n") %}

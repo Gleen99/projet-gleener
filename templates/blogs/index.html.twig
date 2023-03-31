@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if blogs is null %}
-        <p>Blog not found.</p>
-    {% else %}
-        <h1>{{ blogs.title }}</h1>
-        <p>{{ blogs.description }}</p>
-        <p>{{ blogs.content }}</p>
-    {% endif %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        {% if blogs is null %}
+          <p>Blog not found.</p>
+        {% else %}
+          <h1 style="text-align:center;">{{ blogs.title }}</h1>
+          <h4 style="text-align:left;">Description : {{ blogs.description }}</h4>
+          <br>
+          {% for paragraph in blogs.content|split("\n") %}
+            {% if paragraph|trim is not empty %}
+                <p>{{ paragraph|trim }}</p>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
