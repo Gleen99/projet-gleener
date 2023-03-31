@@ -19,7 +19,10 @@
             <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
                 <ul class="navbar-nav w-100 justify-content-center">
                     <li class="nav-item active">
-                        <a class="nav-link" href={{ path('app_home_page') }}>Accueil</a>
+                    {# logo #}
+                        <a class="nav-link" href={{ path('app_home_page') }}>
+                            <img src="{{ asset('logo1.png') }}" alt="logo1" style=" height: 30px; width: auto; margin-right: 30px;">
+                        </a>
                     </li>
                     {% if user != null and is_granted('ROLE_ADMIN') %}
                     
