@@ -28,38 +28,42 @@
                     </tr>
                 </tbody>
             </table>
-              {% if posts is empty %}
-                  <a href="{{ path('app_new_post') }}" class="btn btn-primary">Ajouter un post</a>
-
-                {% else %}
-            <h2>Posts by {{ user.username }}</h2>
-                  
-                        <div class="container w-100">
-                            <div class="row justify-content-around flex-wrap overflow-auto">
-                              {% for post in posts %}
-                                  <h3>{{ post.title }}</h3>
-                                      <p>{{ post.content }}</p>
-                                      <div class="card-footer text-muted">Publié le {{ post.date|date('d/m/Y') }}
-                                      <a href={{ path('app_post', {'id':post.id})}} class="btn btn-primary">Voir plus</a>
-                                        <br> <a href="{{ path('app_new_post') }}" class="btn btn-primary">Ajouter un post</a>
-                                    <br> <br><a href={{ path('app_delete_post', {'id':post.id})}} class="btn btn-primary">Delete Post</a>
-                                      </div>
-                                {% endfor %}
-                            </div>
+{# affichage des posts de l'utilisateur #}
+            {% if posts is empty %}
+              <a href="{{ path('app_new_post') }}" class="btn btn-primary">Ajouter un post</a>
+            {% else %}
+              <h1 class="my-5 text-center">Vos posts :</h1>
+              <div class="container w-100">
+                <div class="row justify-content-around flex-wrap overflow-auto">
+                  {% for post in posts %}
+                    <div class="col-md-4 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <h3 class="card-title">{{ post.title }}</h3>
+                          <p class="card-text">{{ post.content|slice(0, 120) ~ (post.content|length > 120 ? '...' : '') }}</p>
+                          <br>
+                          <a href="{{ path('app_post', {'id':post.id}) }}" class="btn btn-primary">Voir plus</a>
+                          <a href="{{ path('app_delete_post', {'id':post.id}) }}" class="btn btn-danger">Delete Post</a>
                         </div>
+                        <div class="card-footer text-muted">Publié le : {{ post.date|date('d/m/Y') }}</div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+  {# affichage des commentaire de l'utilisateur #}
+            {% if comments is empty %}
+              <p>Vous n'avez pas de commentaire.</p>
+            {% else %}
+              <h1 class="my-5 text-center">Vos commentaires : </h1>
+              {% for comment in comments %}
+                <h3>Commentaire sur le post "{{ comment.post.title }}"</h3>
+                <p>{{ comment.text }}</p>
+              {% endfor %}
+            {% endif %}
 
-                          {% endif %}
-                          {% if comments is empty %}
-                        <p>Vous n'avez pas de commentaire.</p>
-                      {% else %}
-                        <h2>Comments by {{ user.username }}</h2>
-                        {% for post in posts %}
-                          <h3>{{ post.title }}</h3>
-                          {% for comment in post.comments %}
-                            <p>Commentaire : <b>{{ comment.text }}</b></p>
-                          {% endfor %}
-                        {% endfor %}
-                      {% endif %}
+
             {% else %}
             <p class="text-center">Vous devez vous connecter pour accéder à cette page.</p>
             {% endif %}
