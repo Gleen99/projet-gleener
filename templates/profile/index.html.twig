@@ -53,22 +53,31 @@
               </div>
             {% endif %}
   {# affichage des commentaire de l'utilisateur #}
+
             {% if comments is empty %}
-              <p>Vous n'avez pas de commentaire.</p>
+              <div class="alert alert-info" role="alert">
+                Vous n'avez pas de commentaire.
+              </div>
             {% else %}
-              <h1 class="my-5 text-center">Vos commentaires : </h1>
+              <h1 class="my-5 text-center">Vos commentaires :</h1>
               {% for comment in comments %}
-                <h3>Commentaire sur le post "{{ comment.post.title }}"</h3>
-                <p>{{ comment.text }}</p>
+                <div class="card mb-3">
+                  <div class="card-header">
+                    Commentaire sur le post de l'utilisateur : <strong>{{ comment.post.title }}</strong>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">{{ comment.text }}</p>
+                  </div>
+                </div>
               {% endfor %}
             {% endif %}
-
-
             {% else %}
-            <p class="text-center">Vous devez vous connecter pour accéder à cette page.</p>
+              <div class="alert alert-warning" role="alert">
+                Vous devez vous connecter pour accéder à cette page.
+              </div>
             {% endif %}
-        </div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
