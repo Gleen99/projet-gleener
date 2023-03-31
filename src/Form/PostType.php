@@ -36,7 +36,7 @@ class PostType extends AbstractType
                 'label' => 'Autre'
             ])
             ->add('annonce', ChoiceType::class, array(
-                'label' => 'form.label.annonce',
+                'label' => 'Type',
                 'required' => true,
                 'multiple' => true,
                 'choice_translation_domain' => 'post',
@@ -44,8 +44,13 @@ class PostType extends AbstractType
                 'choice_label' => function ($value, $key, $index) {
                     return $value;
                 },
+                'choice_attr' => function($choice, $key, $value) {
+                    // Ajouter un espace après chaque choix
+                    return ['class' => 'choice-item', 'style' => 'margin-right: 10px; margin-left: 10px;'];
+                },
                 'expanded' => true,
             ));
+            
     }
 
     public function configureOptions(OptionsResolver $resolver)
