@@ -72,7 +72,7 @@ class SecurityController extends AbstractController
     
             // Authenticate user and redirect to homepage
             if ($security->getUser()) {
-                return $this->redirectToRoute('app_register');
+                return $this->redirectToRoute('app_home_page');
             }
             else {
                 return $userAuthenticator->authenticateUser(
