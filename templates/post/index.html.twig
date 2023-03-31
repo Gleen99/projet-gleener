@@ -10,18 +10,19 @@
             <div class="row justify-content-around">
 
                     <div class="card text-center w-100 mt-4 p-0">
-                        <div class="card-header">{{ posts.description }}</div>
                             <div class="card-body">
+                                <h4 class="card-title">{{ posts.title }}</h4>
+                                    <p class="card-header" style="text-align: left;">{{ posts.description }}</p>
+                                    <p class="card-body" style="text-align: left;">{{ posts.content }}</p>
+                                <div class="card-footer">
+                                    <p><strong>Information supplémentaire :</strong><br>{{ posts.other }}</p>
 
-                                <h6 class="card-title text-muted">{{ posts.title }}</h6>
-                                <p class="card-text">{{ posts.content }}</p>
-                                <p class="card-text">Information supplémentaire:<br>{{ posts.other }}</p>
-                                
-                                <p class="card-text">Adresse:<br>{{ posts.localisation}} {{ posts.ville }}</p>
+                                    <p><strong>Adresse :</strong><br>{{ posts.localisation}} {{ posts.ville }}</p>
+                                </div>
 
 
                             </div>
-                        <div class="card-footer text-muted">Créé par {{ posts.creator.username }} le {{ posts.date|date('d/m/Y à H:i:s') }}</div>
+                        <div class="card-footer text-muted">Créé par <strong>{{ posts.creator.username }}</strong> le {{ posts.date|date('d/m/Y à H:i:s') }}</div>
 
                     </div>
 
