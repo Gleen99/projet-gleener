@@ -9,45 +9,44 @@
         <div class="container w-100">
             <div class="row justify-content-around">
 
-                    <div class="card text-center w-100 mt-4 p-0">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ posts.title }}</h4>
-                                    <p class="card-header" style="text-align: left;">{{ posts.description }}</p>
-                                    <p class="card-body" style="text-align: left;">{{ posts.content }}</p>
-                                <div class="card-footer">
-                                    <p><strong>Information supplémentaire :</strong><br>{{ posts.other }}</p>
-
-                                    <p><strong>Adresse :</strong><br>{{ posts.localisation}} {{ posts.ville }}</p>
-                                </div>
-
-
-                            </div>
-                        <div class="card-footer text-muted">Créé par <strong>{{ posts.creator.username }}</strong> le {{ posts.date|date('d/m/Y à H:i:s') }}</div>
-
+                <div class="card text-center w-100 mt-4 p-0">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ posts.title }}</h4>
+                        <p class="card-header" style="text-align: left;">{{ posts.description }}</p>
+                        <p class="card-body" style="text-align: left;">{{ posts.content }}</p>
+                        <div class="card-footer">
+                            <p><strong>Information supplémentaire :</strong><br>{{ posts.other }}</p>
+                            <p><strong>Adresse :</strong><br>{{ posts.localisation}} {{ posts.ville }}</p>
+                        </div>
                     </div>
-
-                <div class="card text-left w-100 mt-4 p-0">
-                    <div class="card-header">Commentaires ({{ posts.comments.count }})</div>
-                        <div class="card-body">
-                    {% for comment in posts.comments %}
-                        <h6 class="card-title text-muted pb-0 mb-0 mt-2"><b class="fs-4">{{ comment.text }}</b> crée par {{ comment.creator.username }}</h6>
-                        <a class="pt-0 mt-0" href={{ path('app_report', {'id':comment.id}) }}>Signaler ({{ comment.reports.count }})</a>
-                          <div>
-                          <a href="{{ path('like_comment', {'id': comment.id}) }}" class="btn btn-success">J'aime({{ comment.likes }})</a>
-                          <a href="{{ path('dislike_comment', {'id': comment.id}) }}" class="btn btn-danger">Je n'aime pas({{ comment.dislikes }})</a> 
-                                         </div>
-                                         
-                    {% endfor %}
-                    </div>
+                    <div class="card-footer text-muted">Créé par <strong>{{ posts.creator.username }}</strong> le {{ posts.date|date('d/m/Y à H:i:s') }}</div>
                 </div>
 
-                <div class="card text-center w-100 mt-4 p-0 mb-4">
+                <div class="card text-left w-100 mt-4 p-0">
+                <div class="card-header mb-3">Commentaires ({{ posts.comments.count }})</div>
+                <ul class="list-group list-group-flush">
+                    {% for comment in posts.comments %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                        <h6 class="card-title text-muted mb-2"><b class="fw-bold">{{ comment.creator.username }} :</b> {{ comment.text }}</h6>
+                        <div>
+                            <a href={{ path('app_report', {'id':comment.id}) }} class="btn btn-warning">{{ 'Signaler (' ~ comment.reports.count ~ ')' }}</a>
+                            <a href="{{ path('like_comment', {'id': comment.id}) }}" class="btn btn-success">J'aime ({{ comment.likes }})</a>
+                            <a href="{{ path('dislike_comment', {'id': comment.id}) }}" class="btn btn-danger">Je n'aime pas ({{ comment.dislikes }})</a> 
+                        </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+
+                <div class="card text-center w-100 mt-4 p-0 mb-4 bg-light rounded">
                     <div class="card-header">Ajouter un commentaire</div>
                     <div class="card-body">
                     {% if user %}
-                        {{ form_start(commentForm, {'action': path('add_comment', {'id': posts.id})}) }}
-                            {{ form_widget(commentForm.text) }}
-                            <button type="submit">Envoyer</button>
+                        {{ form_start(commentForm, {'action': path('add_comment', {'id': posts.id}), 'attr': {'class': 'form-group'}}) }}
+                            {{ form_widget(commentForm.text, {'attr': {'class': 'form-control w-100', 'rows': 5}}) }}
+                            <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
                         {{ form_end(commentForm) }}
                     {% else %}
                         <h6 class="card-title text-muted">Tu dois être connecté(e) pour ça!</h6>
