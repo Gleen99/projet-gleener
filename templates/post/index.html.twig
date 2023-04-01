@@ -30,9 +30,9 @@
                         <div class="d-flex justify-content-between">
                         <h6 class="card-title text-muted mb-2"><b class="fw-bold">{{ comment.creator.username }} :</b> {{ comment.text }}</h6>
                         <div>
-                            <a href={{ path('app_report', {'id':comment.id}) }} class="btn btn-warning">{{ 'Signaler (' ~ comment.reports.count ~ ')' }}</a>
-                            <a href="{{ path('like_comment', {'id': comment.id}) }}" class="btn btn-success">J'aime ({{ comment.likes }})</a>
-                            <a href="{{ path('dislike_comment', {'id': comment.id}) }}" class="btn btn-danger">Je n'aime pas ({{ comment.dislikes }})</a> 
+                            <a {% if app.user %}href="{{ path('like_comment', { 'id': comment.id }) }}" {% else %}role="button" aria-disabled="true" class="btn btn-link disabled" style="color: #4d4d4d; cursor: default; text-decoration: none" {% endif %}><i class="far fa-thumbs-up" style="color:green; text-decoration: none"></i>({{ comment.likes }})</a>
+                            <a {% if app.user %}href="{{ path('dislike_comment', { 'id': comment.id }) }}" {% else %}role="button" aria-disabled="true" class="btn btn-link disabled" style="color: #4d4d4d; cursor: default; text-decoration: none" {% endif %} class="btn btn-link" style="color:black; text-decoration: none"><i class="far fa-thumbs-down" style="color:brown"></i>({{ comment.dislikes }})</a>
+                            <a href={{ path('app_report', {'id':comment.id}) }} class="btn btn-warning" style="color:black"><i class="fa fa-flag"></i>Signaler({{ comment.reports.count }})</a>
                         </div>
                         </div>
                     </li>

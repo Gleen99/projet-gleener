@@ -66,6 +66,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         // Ajouter le rôle 'ROLE_USER' par défaut
         $this->roles[] = 'ROLE_USER';
+        $this->likes = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,6 +304,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string {
         return $this->getUsername();
-    }
+    } 
 }
 
