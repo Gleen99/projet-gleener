@@ -161,33 +161,33 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
  */
 #[Route("/posts/remove/{id}", name:"app_delete_post")]
     
-public function deletePost(int $id,Posts $post, Comments $comment, PersistenceManagerRegistry $doctrine): Response
-{
-    $entityManager = $doctrine->getManager();
-    $postsRepository = $entityManager->getRepository(Posts::class);
-    
-    if (!$post) {
-        throw $this->createNotFoundException(sprintf('The post with id "%s" could not be found', $request->get('id')));
+public function deletePost(int $id,Posts $post, PersistenceManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $postsRepository = $entityManager->getRepository(Posts::class);
+        
+        if (!$post) {
+            throw $this->createNotFoundException(sprintf('The post with id "%s" could not be found', $request->get('id')));
+        }
+
+    // Supprimer les commentaires du post
+    $comments = $post->getComments();
+    foreach ($comments as $comment) {
+    // Supprimer les reports associés au commentaire
+    $reports = $comment->getReports();
+    foreach ($reports as $report) {
+        $entityManager->remove($report);
     }
 
- // Supprimer les commentaires du post
-$comments = $post->getComments();
-foreach ($comments as $comment) {
-// Supprimer les reports associés au commentaire
-$reports = $comment->getReports();
-foreach ($reports as $report) {
-    $entityManager->remove($report);
-}
+    // Supprimer le commentaire lui-même
+    $entityManager->remove($comment);
+    }
 
-// Supprimer le commentaire lui-même
-$entityManager->remove($comment);
-}
+    // Supprimer le post lui-même
+    $entityManager->remove($post);
+    $entityManager->flush();
 
-// Supprimer le post lui-même
-$entityManager->remove($post);
-$entityManager->flush();
-
-    // Redirection vers la liste des posts
-    return $this->redirectToRoute('app_posts');
-}
+        // Redirection vers la liste des posts
+        return $this->redirectToRoute('app_posts');
+    }
 }
