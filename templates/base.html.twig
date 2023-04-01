@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2a593e">
         <div class="container-fluid">
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingNavbar3">
@@ -23,7 +23,7 @@
                     <li class="nav-item active">
                     {# logo #}
                         <a class="nav-link" href={{ path('app_home_page') }}>
-                            <img src="{{ asset('logo1.png') }}" alt="logo1" style=" height: 30px; width: auto; margin-right: 30px;">
+                            <img src="{{ asset('logo2.png') }}" alt="logo2" style=" height: 30px; width: auto; margin-right: 30px;">
                         </a>
                     </li>
                     {% if user != null and is_granted('ROLE_ADMIN') %}
