@@ -35,7 +35,7 @@
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
-                <a href={{ path('app_blog', {'id':blog.id})}} class="btn btn-primary">Voir plus</a>
+                <a href={{ path('app_blog', {'id':blog.id})}} class="btn btn-primary" style="background-color:#2a593e;">Voir plus</a>
             </div>
             <div class="card-footer text-muted">Publié le {{ blog.date|date('d/m/Y') }} par {{ blog.creator.username }}</div>
         </div>
