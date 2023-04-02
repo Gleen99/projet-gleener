@@ -27,7 +27,7 @@ class Comments
    
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'creator_id', nullable: false)]
     private ?User $creator = null;
 
 
@@ -112,12 +112,12 @@ public function setDislikes($dislikes)
     
     public function getUser(): ?User
     {
-        return $this->user;
+        return $this->creator;
     }
 
     public function setUser(?User $user): self
     {
-        $this->user = $user;
+        $this->creator = $user;
 
         return $this;
     }

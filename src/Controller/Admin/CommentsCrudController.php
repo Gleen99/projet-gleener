@@ -16,7 +16,7 @@ class CommentsCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('text')->setLabel('Texte'),
-            AssociationField::new('user')->setLabel('Créateur du commentaire')
+            AssociationField::new('creator')->setLabel('Créateur du commentaire')
         ];
     }
 
