@@ -1,22 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        {% if blogs is null %}
-          <p>Blog not found.</p>
-        {% else %}
-          <h1 style="text-align:center;">{{ blogs.title }}</h1>
-          <h4 style="text-align:left;">Description : {{ blogs.description }}</h4>
-          <br>
-          {% for paragraph in blogs.content|split("\n") %}
-            {% if paragraph|trim is not empty %}
-                <p>{{ paragraph|trim }}</p>
+    {% if blogs %}
+        {% set compteur = blogs.id %}
+        {% set image = compteur ~ '.jpg' %}
+        <div class="header2">
+            <div class="header-div2">
+                <h1 class="header2-title2">{{ blogs.title }}</h1>
+            </div>
+        </div>
+        <style>
+            .header2{
+                width: 100%;
+                background-size: cover;
+                background-position: center;
+                height:100vh ;
+                background-image: url(../{{image}}), linear-gradient(#003a0096, #0080008f);
+                background-blend-mode: multiply ;
+                filter: brightness(0.9);
+                margin-bottom : 3rem;
+                position: relative;
+            }
+        </style>
+    {% endif %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% if blogs is null %}
+            <p>Blog not found.</p>
+            {% else %}
+            <h4 style="text-align:justify;">Description : {{ blogs.description }}</h4>
+            <br>
+            {% for paragraph in blogs.content|split("\n") %}
+                {% if paragraph|trim is not empty %}
+                    <p style="text-align: justify;">{{ paragraph|trim }}</p>
+                {% endif %}
+            {% endfor %}
+
             {% endif %}
-          {% endfor %}
-        {% endif %}
-      </div>
+        </div>
+        </div>
     </div>
-  </div>
 {% endblock %}

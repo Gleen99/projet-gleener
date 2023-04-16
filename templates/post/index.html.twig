@@ -52,10 +52,10 @@
                             {% if user %}
                                 {{ form_start(commentForm, {'action': path('add_comment', {'id': posts.id}), 'attr': {'class': 'form-group'}}) }}
                                     {{ form_widget(commentForm.text, {'attr': {'class': 'form-control w-100', 'rows': 5}}) }}
-                                    <button type="submit" class="btn btn-primary mt-3" style="background-color:#2a593e;">Envoyer</button>
+                                    <button type="submit" class="btn btn-primary mt-3 button">Envoyer</button>
                                 {{ form_end(commentForm) }}
                             {% else %}
-                                <h6 class="card-title text-muted" >Vous devez être connecté(e) pour ça !</h6>
+                                <h6 class="card-title text-muted" >Vous devez être connecté(e) pour ça commenter à ce poste</h6>
                             {% endif %}
                         </div>
                     </div>

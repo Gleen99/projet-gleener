@@ -23,9 +23,37 @@
         </div>
     </div>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
+    <article class="services">
+        <div class="limit services-blocs">
+            <div class="services-bloc">
+                <i class="fas fa-solid fa-hotel services-icon"></i>
+                <p class="services-bloc-title">Hébergements Ecologiques</p>
+                <p class="services-bloc-text">Découvrez des hébergements respectueux de l'environnement qui offrent un confort moderne tout en minimisant leur impact sur la nature.</p>
+            </div>
+
+            <div class="services-bloc">
+                <i class="far fa-solid fa-signs-post services-icon"></i>
+                <p class="services-bloc-title">Voyages responsables</p>
+                <p class="services-bloc-text">Partez à l'aventure avec des voyages responsables qui allient la découverte de la nature et l'immersion culturelle.</p>
+            </div>
+
+            <div class="services-bloc">
+                <i class="fas fa-duotone fa-mountain-sun services-icon"></i>
+                <p class="services-bloc-title">Activités éco-touristiques</p>
+                <p class="services-bloc-text">Partez à l'observation des oiseaux, faites de la randonnée, du vélo ou du kayak et vivez des expériences inoubliables et écologiques.</p>
+            </div>
+
+            <div class="services-bloc">
+                <i class="far fa-solid fa-people-group services-icon"></i>
+                <p class="services-bloc-title">Écotourisme solidaire</p>
+                <p class="services-bloc-text">Voyagez de manière solidaire en soutenant les communautés locales avec nos offres d'écotourisme.</p>
+            </div>
+            
+        </div>
+    </article>
+    <div class="container mt-5 blocs-home">
+        <div class="limit">
+            {# <div class="col-md-6">
                 <h2>Séjour de voyage</h2><br>
                 <h6>"Un séjour voyage écotouristique pour se ressourcer en pleine nature"</h6><br>
                 <p>Découvrez les merveilles de la nature et ressourcez-vous lors d'un séjour écotouristique. Vous pourrez explorer des destinations uniques, comme les forêts tropicales et les déserts arides, ainsi que découvrir la faune sauvage.
@@ -39,8 +67,40 @@
                 <p>L'écotourisme est de plus en plus populaire auprès des voyageurs cherchant à explorer la nature et à découvrir de nouvelles cultures tout en respectant l'environnement. Cependant, il peut parfois être difficile de savoir par où commencer lorsque l'on planifie un voyage éco-responsable. C'est pourquoi nous proposons des séjours inspirants pour vous aider à découvrir des destinations écologiques incroyables tout en minimisant votre impact environnemental. 
                 Nos séjours inspirants sont conçus pour les voyageurs avides d'aventure et soucieux de l'environnement. Nous avons soigneusement sélectionné des destinations écologiques dans le monde entier, où vous pourrez découvrir des cultures uniques et des paysages à couper le souffle, tout en minimisant votre impact sur l'environnement.
                 </p>
+            </div> #}
+            <div>
+                <div class="bloc">
+                    <div class="bloc-image">
+                        <img src="{{ asset('5.jpg') }}" class="bloc-images">
+                    </div>
+                    <div class="textes">
+                        <h1 class="bloc-title">Séjour de voyage</h1>
+                        <h5>Un séjour voyage écotouristique pour se ressourcer en pleine nature</h5><br>
+                        <p class="bloc-paragraph">
+                            Découvrez les merveilles de la nature et ressourcez-vous lors d'un séjour écotouristique. Vous pourrez explorer des destinations uniques, comme les forêts tropicales et les déserts arides, ainsi que découvrir la faune sauvage.
+                            Pour garantir une expérience respectueuse de l'environnement, nous avons sélectionné des hébergements écologiques, tels que des lodges rustiques, des bungalows en bois et des tentes confortables en pleine nature. Ces hébergements ont été conçus pour offrir une expérience authentique et harmonieuse avec la nature.
+                            Des activités écotouristiques sont également proposées, telles que des randonnées guidées, des promenades en bateau, des observations d'animaux sauvages et des cours de cuisine locale. Cette immersion dans la nature vous permettra de découvrir de nouvelles cultures et de vivre une expérience inoubliable, tout en contribuant à la protection de notre planète.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bloc">
+                    <div class="textes2">
+                        <h1 class="bloc-title">Séjours inspirants</h1>
+                        <h5>Séjours éco-responsables : Explorez la nature tout en respectant l'environnement</h5><br>
+                        <p class="bloc-paragraph">
+                            L'écotourisme est de plus en plus populaire auprès des voyageurs cherchant à explorer la nature et à découvrir de nouvelles cultures tout en respectant l'environnement. Cependant, il peut parfois être difficile de savoir par où commencer lorsque l'on planifie un voyage éco-responsable. C'est pourquoi nous proposons des séjours inspirants pour vous aider à découvrir des destinations écologiques incroyables tout en minimisant votre impact environnemental. 
+                            Nos séjours inspirants sont conçus pour les voyageurs avides d'aventure et soucieux de l'environnement. Nous avons soigneusement sélectionné des destinations écologiques dans le monde entier, où vous pourrez découvrir des cultures uniques et des paysages à couper le souffle, tout en minimisant votre impact sur l'environnement.
+                        </p>
+                    </div>
+                    <div class="bloc-image">
+                        <img src="{{ asset('6.jpg') }}" class="bloc-images">
+                    </div>
+                </div>
             </div>
         </div>
+
+
     </div>
 </body>
 {% endblock %}

@@ -2,6 +2,7 @@
 *{
     margin: 0;
     padding: 0;
+    border: 0;
     box-sizing: border-box;
 }
 html{
@@ -9,6 +10,17 @@ html{
 }
 body{
     font-family: 'Ubuntu', sans-serif;
+}
+
+.limit{
+    max-width: 75rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.h1{
+    color: #096009;
 }
 
 a{
@@ -19,16 +31,37 @@ a:hover{
     transition: all .2s;
 }
 
+button{
+    background-color:#2a593e;
+    border: 0px;
+}
 
-  /* header
-  ***************/
+.button{
+    background-color: #2a593e;
+    border: 0px;
+    margin-bottom: 1rem;
+}
+.button:hover{
+    background-color: #0b9e0b;
+    border: 0px;
+}
+.button:focus{
+    border: 0px;
+}
+.button:active{
+    background-color: #2a593e;
+    border: 0px;
+}
+
+
+/*************header***************/
   
 .header{
     width: 100%;
     background-size: cover;
     background-position: center;
     height:100vh ;
-    background-image: url(3.jpg), linear-gradient(#003a0096, #0080008f);
+    background-image: url(4.jpg), linear-gradient(#003a0096, #0080008f);
     background-blend-mode: multiply ;
     filter: brightness(0.9);
 }
@@ -81,7 +114,177 @@ a:hover{
 }
 
 
+.navbar{
+    position: sticky;
+    top: 0px;
+    z-index: 55;
+}
 
+
+
+
+
+/***************** Home page ****************/
+
+.services{
+    /* background-image: url(word-map.png); */
+    background-color: #e8ffe8;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.services-blocs{
+    justify-content: space-between;
+}
+.services-bloc{
+    text-align: center;
+    margin: 4rem 2.5rem;
+}
+.services-bloc:first-child{
+    margin-left: 0rem;
+}
+.services-bloc:last-child{
+    margin-right: 0rem;
+}
+.services-bloc:hover .services-bloc-title{
+    color: #096009;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.services-bloc:hover .services-icon{
+    color: #096009;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.services-icon{
+    color: #2a593e;
+    font-size: 2.3rem;
+    transition: all 1s;
+}
+.services-bloc-title{
+    color: #2a593e;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 1s;
+}
+.services-bloc-text{
+    color: rgb(88, 88, 88);
+    font-size: 0.9rem;
+    line-height: 20px;
+}
+
+
+.textes2{
+    flex-basis: 45%;
+    margin-right: 7rem;
+    /* background-color: #0b9e0b; */
+}
+/****************Article All************/
+
+
+.main{
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+.bloc{
+    display: flex;
+    align-items: center;
+    margin: 5rem 0;
+
+}
+.bloc-image{
+    flex-basis: 50%;
+    height: auto;
+    /* background-color: aqua; */
+    justify-self: center;
+}
+
+.bloc-images{
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    /* justify-self: center; */
+}
+
+.textes{
+    flex-basis: 45%;
+    margin-left: 7rem;
+    /* background-color: #0b9e0b; */
+}
+
+.bloc-title{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-bottom: 2rem;
+    color: #0b9e0b;
+    font-size: 3rem;
+    font-weight: 300;
+}
+.bloc-paragraph{
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    text-align: justify;
+}
+.bloc-link{
+    padding: 1rem 1.5rem;
+    border: 1px solid #000;
+    color: #000;
+}
+.bloc-link:hover{
+    color: #0b9e0b;
+    border: 1px solid #0b9e0b;
+}
+
+.first-word{
+    color: #21b4e1;
+    display: inline-block;
+}
+.second-word{
+    color: #0b9e0b;
+    display: inline-block;
+}
+.third-word{
+    color: rgb(169, 3, 3);
+    display: inline-block;
+}
+
+
+
+/*************** Article One *************/
+
+
+.header-div2{
+    margin: auto;
+    color: #eaeaea;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.header2-title2{
+    font-family: 'Stick No Bills', sans-serif;
+    font-weight: 600;
+    font-size: 6rem;
+    letter-spacing: -2px;
+    text-align: center;
+}
+
+.about-title{
+    color: #2a593e;
+    font-weight: 800;
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
 
 /*************** Footer ****************/
 
