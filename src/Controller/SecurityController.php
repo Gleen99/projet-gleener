@@ -32,7 +32,8 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername, 'error' => $error,
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'title' => 'Se connecter'
         ]);
     }
 
@@ -68,10 +69,11 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
     
-            dump($user); // affiche le contenu de l'objet $user
+            // dump($user); // affiche le contenu de l'objet $user
     
             // Authenticate user and redirect to homepage
             if ($security->getUser()) {
+                
                 return $this->redirectToRoute('app_home_page');
             }
             else {
@@ -90,7 +92,8 @@ class SecurityController extends AbstractController
     
         return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'title' => 'Enregistrez-vous'
         ]);
     }
     

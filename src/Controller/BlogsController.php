@@ -16,7 +16,7 @@ class BlogsController extends AbstractController
     public function indexArticle(EntityManagerInterface $entityManager): Response
     {
         $blogs = $entityManager->getRepository(Blogs::class)->findAll();
-        dump($blogs);
+        // dump($blogs);
 
 
         return $this->render('blogs/indexAll.html.twig', [
@@ -34,6 +34,7 @@ class BlogsController extends AbstractController
         return $this->render('blogs/index.html.twig', [
             'blogs' => $blogs,
             'user' => $this->getUser(),
+            'title' => 'Article'
         ]);
     }
 }

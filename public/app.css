@@ -77,10 +77,11 @@ button{
 
 .header2-title{
     font-family: 'Stick No Bills', sans-serif;
+    font-family: 'Righteous', cursive;
     font-weight: 600;
-    font-size: 13rem;
+    font-size: 12rem;
     margin-top: 8rem;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
 }
 .header2-paragraph{
     font-size: 1.7rem;

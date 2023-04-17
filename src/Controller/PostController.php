@@ -33,7 +33,8 @@ class PostController extends AbstractController
         return $this->render('post/index.html.twig', [
             'posts' => $posts[0],
             'user' => $this->getUser(),
-            'commentForm' => $commentForm->createView()
+            'commentForm' => $commentForm->createView(),
+            'title' => 'Offre à consulter'
         ]);
     }
     
@@ -44,7 +45,8 @@ class PostController extends AbstractController
 
         return $this->render('post/indexAll.html.twig', [
             'posts' => $posts,
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'title' => 'Nos offres'
         ]);
     }
 /**Create Comments */
@@ -66,7 +68,8 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('app_post', [
-            'id' => $post->getId()
+            'id' => $post->getId(),
+            'title' => 'Ajouter un commentaire'
         ]);
     }
 
@@ -153,7 +156,8 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
 
     return $this->render('post/new.html.twig', [
         'user' => $this->getUser(),
-                    'form' => $form->createView(),
+        'form' => $form->createView(),
+        'title' => 'Créer un nouveau poste'
     ]);
 }
 /**

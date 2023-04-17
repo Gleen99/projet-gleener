@@ -31,7 +31,8 @@ class ReportController extends AbstractController
             'controller_name' => 'ReportController',
             'user' => $this->getUser(),
             'reportForm' => $reportForm->createView(),
-            'comments' => $comments[0]
+            'comments' => $comments[0],
+            'title' => 'Signal du commentaire'
         ]);
     }
 

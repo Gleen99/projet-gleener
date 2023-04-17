@@ -23,7 +23,7 @@ class ProfileController extends AbstractController
             'user' => $user,
             'posts' => $posts,
             'comments' => $comments,
-            
+            'title' => 'Profile'
         ]);
     }
 }
